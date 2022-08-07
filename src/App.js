@@ -60,17 +60,27 @@ function App() {
         );
       })}
 
-      {modal ? <Modal /> : null}
+      {modal ? <Modal 글제목={글제목} 글제목변경={글제목변경} /> : null}
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div className="modal">
       <h4>제목</h4>
       <p>날짜</p>
       <p>상세내용</p>
+
+      <button
+        onClick={() => {
+          let copy = [...props.글제목];
+          copy[0] = "여자코트 추천";
+          props.글제목변경(copy);
+        }}
+      >
+        글수정
+      </button>
     </div>
   );
 }
