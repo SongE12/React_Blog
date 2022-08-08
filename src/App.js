@@ -11,6 +11,12 @@ function App() {
   let [modal, setModal] = useState(false);
   let [title, setTitle] = useState(0);
   let [input, setInput] = useState();
+  let [날짜, 날짜변경] = useState(["2월 17일", "2월 17일", "2월 17일"]);
+  const date = new Date();
+
+  const month = ("0" + (date.getMonth() + 1)).slice(-2);
+  const day = ("0" + date.getDay()).slice(-2);
+  const dateStr = month + "월" + " " + day + "일";
 
   return (
     <div className="App">
@@ -54,7 +60,7 @@ function App() {
                 삭제
               </button>
             </h4>
-            <p>2월 17일 발행</p>
+            <p>{날짜[i]}</p>
           </div>
         );
       })}
@@ -69,12 +75,15 @@ function App() {
         <button
           onClick={() => {
             if (!input) return;
-            let copy = [...글제목];
-            copy.unshift(input);
-            글제목변경(copy);
-            let like = [...따봉];
-            like.unshift(0);
-            따봉변경(like);
+            let titleCopy = [...글제목];
+            titleCopy.unshift(input);
+            글제목변경(titleCopy);
+            let likeCopy = [...따봉];
+            likeCopy.unshift(0);
+            따봉변경(likeCopy);
+            let dayCopy = [...날짜];
+            dayCopy.unshift(dateStr);
+            날짜변경(dayCopy);
           }}
         >
           추가
