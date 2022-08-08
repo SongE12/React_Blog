@@ -27,13 +27,20 @@ button {
 
 .input {
   display: flex;
+  height: 200px;
   justify-content: center;
+  align-items: center;
+}
+
+input {
+  width: 500px;
+  height: 25px;
 }
 
 h4 {
   display: flex;
 }
 
-h4 button {
+button {
   margin-left: 10px;
 }
