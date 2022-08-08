@@ -10,31 +10,13 @@ function App() {
   let [따봉, 따봉변경] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
   let [title, setTitle] = useState(0);
+  let [input, setInput] = useState();
 
   return (
     <div className="App">
       <div className="black-nav">
         <h4>ReactBlog</h4>
       </div>
-
-      <button
-        onClick={() => {
-          let copy = [...글제목];
-          글제목변경(copy.sort());
-        }}
-      >
-        가나다순정렬
-      </button>
-
-      <button
-        onClick={() => {
-          let copy = [...글제목];
-          copy[0] = "여자코드 추천";
-          글제목변경(copy);
-        }}
-      >
-        글수정
-      </button>
 
       {글제목.map(function (a, i) {
         return (
@@ -49,20 +31,54 @@ function App() {
             >
               {글제목[i]}{" "}
               <span
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   let copy = [...따봉];
                   copy[i] += 1;
                   따봉변경(copy);
                 }}
               >
-                👍
-              </span>{" "}
-              {따봉[i]}
+                👍 {따봉[i]}
+              </span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  let copy = [...글제목];
+                  copy.splice(i, 1);
+                  글제목변경(copy);
+                  let like = [...따봉];
+                  like.splice(i, 1);
+                  따봉변경(like);
+                }}
+              >
+                삭제
+              </button>
             </h4>
             <p>2월 17일 발행</p>
           </div>
         );
       })}
+
+      <div className="input">
+        <input
+          onChange={(e) => {
+            setInput(e.target.value);
+          }}
+          type="text"
+        />
+        <button
+          onClick={() => {
+            let copy = [...글제목];
+            copy.unshift(input);
+            글제목변경(copy);
+            let like = [...따봉];
+            like.unshift(0);
+            따봉변경(like);
+          }}
+        >
+          추가
+        </button>
+      </div>
 
       {modal ? (
         <Modal 글제목={글제목} 글제목변경={글제목변경} title={title} />

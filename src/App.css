@@ -24,3 +24,16 @@ button {
   background: #eee;
   text-align: left;
 }
+
+.input {
+  display: flex;
+  justify-content: center;
+}
+
+h4 {
+  display: flex;
+}
+
+h4 button {
+  margin-left: 10px;
+}
