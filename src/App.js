@@ -68,6 +68,7 @@ function App() {
         />
         <button
           onClick={() => {
+            if (!input) return;
             let copy = [...글제목];
             copy.unshift(input);
             글제목변경(copy);
